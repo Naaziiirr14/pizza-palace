@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 
-
 const authRoutes = require('./routes/authRoutes');
 const pizzaRoutes = require('./routes/pizzaRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -17,8 +16,15 @@ const app = express();
 
 // Security
 app.use(helmet());
+
+// CORS fix - production + local
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://pizza-palace-phi.vercel.app',
+    process.env.CLIENT_URL,
+  ].filter(Boolean),
   credentials: true,
 }));
 
