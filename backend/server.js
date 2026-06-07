@@ -14,6 +14,9 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
+// Trust proxy - Render fix ← இதை add பண்ணினேன்
+app.set('trust proxy', 1);
+
 // Security
 app.use(helmet());
 
@@ -33,6 +36,8 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
   message: { success: false, message: 'Too many requests, please try again later.' },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 app.use('/api/', limiter);
 
