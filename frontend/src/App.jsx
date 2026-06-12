@@ -16,10 +16,13 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 // Admin Pages
+import AdminDashboard from './pages/admin/Dashboard';
+import AdminPizzas from './pages/admin/Pizzas';
+import AdminOrders from './pages/admin/Orders';
+import AdminUsers from './pages/admin/Users';
 import AdminPayments from './pages/admin/Payments';
 import AdminLayout from './components/layout/AdminLayout';
 
-// Loading Spinner
 const Spinner = () => (
   <div className="min-h-screen flex items-center justify-center">
     <div className="w-10 h-10 border-4 border-pizza-red border-t-transparent rounded-full animate-spin" />
@@ -34,10 +37,10 @@ const ProtectedRoute = ({ children }) => {
 
 const AdminRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  if (loading) return <Spinner />; // ← loading முடியும்வரை காத்திரு
-  if (!user) return <Navigate to="/login" replace />; // ← login இல்லன்னா login page
-  if (user.role !== 'admin') return <Navigate to="/" replace />; // ← admin இல்லன்னா home
-  return children; // ← admin ஆ இருந்தா dashboard
+  if (loading) return <Spinner />;
+  if (!user) return <Navigate to="/login" replace />;
+  if (user.role !== 'admin') return <Navigate to="/" replace />;
+  return children;
 };
 
 export default function App() {
@@ -49,7 +52,10 @@ export default function App() {
           <AdminRoute>
             <AdminLayout>
               <Routes>
-                <Route index element={<Navigate to="payments" replace />} />
+                <Route index element={<AdminDashboard />} />
+                <Route path="pizzas" element={<AdminPizzas />} />
+                <Route path="orders" element={<AdminOrders />} />
+                <Route path="users" element={<AdminUsers />} />
                 <Route path="payments" element={<AdminPayments />} />
               </Routes>
             </AdminLayout>
