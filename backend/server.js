@@ -14,20 +14,23 @@ const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-// Trust proxy - Render fix ← இதை add பண்ணினேன்
+// Trust proxy - Render fix
 app.set('trust proxy', 1);
 
 // Security
 app.use(helmet());
 
-// CORS fix - production + local
+// CORS fix - எல்லா vercel URLs உம் allow ஆகும்
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'https://pizza-palace-phi.vercel.app',
-    process.env.CLIENT_URL,
-  ].filter(Boolean),
+  origin: function(origin, callback) {
+    if (!origin || 
+        origin.includes('vercel.app') || 
+        origin.includes('localhost')) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
