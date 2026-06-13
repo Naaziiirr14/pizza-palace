@@ -14,14 +14,18 @@ export default function Login() {
     try {
       const user = await login(form.email, form.password);
       toast.success(`Welcome back, ${user.name}! 🍕`);
-      if (user.role === 'admin') {
-        window.location.href = '/admin';
-      } else {
-        window.location.href = '/';
-      }
+
+      // 500ms wait பண்ணிட்டு redirect
+      setTimeout(() => {
+        if (user.role === 'admin') {
+          window.location.replace('/admin');
+        } else {
+          window.location.replace('/');
+        }
+      }, 500);
+
     } catch (err) {
       toast.error(err.response?.data?.message || 'Login failed');
-    } finally {
       setLoading(false);
     }
   };
