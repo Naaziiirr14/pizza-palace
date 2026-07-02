@@ -10,6 +10,7 @@ const authRoutes = require('./routes/authRoutes');
 const pizzaRoutes = require('./routes/pizzaRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const userRoutes = require('./routes/userRoutes'); // ← add பண்ணினேன்
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
@@ -20,7 +21,7 @@ app.set('trust proxy', 1);
 // Security
 app.use(helmet());
 
-// CORS fix - எல்லா vercel URLs உம் allow ஆகும்
+// CORS fix
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin || 
@@ -56,6 +57,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/pizzas', pizzaRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/users', userRoutes); // ← add பண்ணினேன்
 
 // Health check
 app.get('/api/health', (req, res) => {
