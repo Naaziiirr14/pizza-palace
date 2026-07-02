@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const { verifyToken, isAdmin } = require('../middleware/auth');
+const { verifyToken, isAdmin } = require('../middleware/authMiddleware');
 
 // GET /api/users - All users (Admin only)
 router.get('/', verifyToken, isAdmin, async (req, res, next) => {
