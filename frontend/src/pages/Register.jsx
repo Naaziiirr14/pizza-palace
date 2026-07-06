@@ -17,7 +17,7 @@ export default function Register() {
     try {
       await register(form.name, form.email, form.password);
       toast.success('Account created! Please login 🍕');
-      navigate('/login'); // ← இதுமட்டும் மாத்தினேன்
+      navigate('/login'); 
     } catch (err) {
       toast.error(err.response?.data?.message || 'Registration failed');
     } finally {

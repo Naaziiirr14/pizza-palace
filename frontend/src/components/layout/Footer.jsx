@@ -26,7 +26,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-center text-xs mt-8 opacity-50">
-        © {new Date().getFullYear()} Pizza Palace · Built with MERN Stack ❤️
+        © {new Date().getFullYear()} Pizza Palace · Built with MERN Stack 
       </div>
     </footer>
   );

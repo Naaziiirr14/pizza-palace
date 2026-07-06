@@ -3,7 +3,7 @@ const Payment = require('../models/Payment');
 const Order = require('../models/Order');
 const Pizza = require('../models/Pizza');
 
-// Razorpay lazy load - Node.js v24 fix
+// Razorpay load 
 const getRazorpay = () => {
   const Razorpay = require('razorpay');
   return new Razorpay({
@@ -24,7 +24,7 @@ exports.createRazorpayOrder = async (req, res, next) => {
       });
     }
 
-    // Amount calculate பண்ணு
+    // Amount calculate
     let totalAmount = 0;
     const orderItems = [];
 
@@ -44,7 +44,7 @@ exports.createRazorpayOrder = async (req, res, next) => {
       totalAmount += pizza.price * item.qty;
     }
 
-    // Razorpay order create பண்ணு
+    // Razorpay order create
     const razorpay = getRazorpay();
     const razorpayOrder = await razorpay.orders.create({
       amount: totalAmount * 100, // paise
@@ -52,7 +52,7 @@ exports.createRazorpayOrder = async (req, res, next) => {
       receipt: `receipt_${Date.now()}`,
     });
 
-    // DB-ல order save பண்ணு
+    // DB order save
     const order = await Order.create({
       customerId: req.user._id,
       items: orderItems,
@@ -61,7 +61,7 @@ exports.createRazorpayOrder = async (req, res, next) => {
       status: 'Pending',
     });
 
-    // Payment record save பண்ணு
+    // Payment record save 
     const payment = await Payment.create({
       userId: req.user._id,
       orderId: order._id,
@@ -94,7 +94,7 @@ exports.verifyPayment = async (req, res, next) => {
       orderId 
     } = req.body;
 
-    // Signature verify பண்ணு
+    // Signature verify
     const body = razorpay_order_id + '|' + razorpay_payment_id;
     const expectedSignature = crypto
       .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
@@ -112,7 +112,7 @@ exports.verifyPayment = async (req, res, next) => {
       });
     }
 
-    // Payment update பண்ணு
+    // Payment update
     const payment = await Payment.findOneAndUpdate(
       { razorpayOrderId: razorpay_order_id },
       { 
@@ -123,7 +123,7 @@ exports.verifyPayment = async (req, res, next) => {
       { new: true }
     );
 
-    // Order confirm பண்ணு
+    // Order confirm 
     const order = await Order.findByIdAndUpdate(
       orderId,
       { status: 'Confirmed' },
@@ -142,7 +142,7 @@ exports.verifyPayment = async (req, res, next) => {
   }
 };
 
-// GET /api/payment/all - Admin மட்டும்
+// GET /api/payment/all - Admin only
 exports.getAllPayments = async (req, res, next) => {
   try {
     const payments = await Payment.find()

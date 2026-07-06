@@ -63,7 +63,7 @@ function PizzaModal({ pizza, onClose, onSaved }) {
 export default function AdminPizzas() {
   const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [modal, setModal] = useState(null); // null | 'add' | pizza object
+  const [modal, setModal] = useState(null); 
 
   const fetchPizzas = () => {
     api.get('/pizzas?available=false')

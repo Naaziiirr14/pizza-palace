@@ -10,12 +10,11 @@ const authRoutes = require('./routes/authRoutes');
 const pizzaRoutes = require('./routes/pizzaRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
-const userRoutes = require('./routes/userRoutes'); // ← add பண்ணினேன்
+const userRoutes = require('./routes/userRoutes'); 
 const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
-// Trust proxy - Render fix
 app.set('trust proxy', 1);
 
 // Security

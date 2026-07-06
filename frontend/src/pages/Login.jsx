@@ -15,7 +15,7 @@ export default function Login() {
       const user = await login(form.email, form.password);
       toast.success(`Welcome back, ${user.name}! 🍕`);
 
-      // 500ms wait பண்ணிட்டு redirect
+      // 500ms wait 
       setTimeout(() => {
         if (user.role === 'admin') {
           window.location.replace('/admin');
@@ -38,7 +38,7 @@ export default function Login() {
 
         <div className="bg-orange-50 border border-orange-100 rounded-lg p-3 mb-5 text-xs text-gray-600">
           <strong>Admin:</strong> admin@pizzapalace.com / Admin@123<br />
-          <strong>Customer:</strong> rahul@test.com / Test@123
+          <strong>Customer:</strong> cris@gmail.com / 123456
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

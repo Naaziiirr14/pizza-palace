@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import api from '../../services/api';
 
 export default function AdminUsers() {
-  // Note: A dedicated /api/admin/users endpoint would be added for production.
-  // This shows the pattern using profile + seeded data display.
+  
   const [users] = useState([
     { _id: '1', name: 'Admin', email: 'admin@pizzapalace.com', role: 'admin', createdAt: new Date().toISOString() },
     { _id: '2', name: 'Rahul Sharma', email: 'rahul@test.com', role: 'customer', createdAt: new Date().toISOString() },
