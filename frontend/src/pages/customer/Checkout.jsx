@@ -39,7 +39,7 @@ export default function Checkout() {
     try {
       const loaded = await loadRazorpay();
       if (!loaded) {
-        toast.error('Razorpay load ஆகவில்லை.');
+        toast.error('Razorpay failed to load. Check your internet connection.');
         setLoading(false);
         return;
       }
@@ -69,7 +69,7 @@ export default function Checkout() {
             toast.success('🎉 Payment Successful! Order Confirmed.');
             navigate('/orders');
           } catch {
-            toast.error('Payment verify ஆகவில்லை.');
+            toast.error('Payment verification failed. Please try again.');
           }
         },
 
