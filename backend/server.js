@@ -56,7 +56,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/pizzas', pizzaRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payment', paymentRoutes);
-app.use('/api/users', userRoutes); // ← add பண்ணினேன்
+app.use('/api/users', userRoutes); 
 
 // Health check
 app.get('/api/health', (req, res) => {
