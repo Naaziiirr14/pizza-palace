@@ -49,7 +49,7 @@ export default function AdminDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <StatCard label="Total Revenue" value={`₹${revenue.toLocaleString()}`} sub="↑ All time" icon="💰" />
-        <StatCard label="Total Orders" value={orders.length} sub={`${pending} pending`} icon="" />
+        <StatCard label="Total Orders" value={orders.length} sub={`${pending} pending`} icon="💰" />
         <StatCard label="Total Pizzas" value={pizzas.length} sub={`${pizzas.filter(p=>p.isAvailable).length} available`} icon="🍕" />
         <StatCard label="Payments" value={payments.length} sub={`${payments.filter(p=>p.status==='success').length} success`} icon="💳" />
       </div>

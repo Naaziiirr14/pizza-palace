@@ -31,7 +31,7 @@ export default function AdminOrders() {
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="font-display text-2xl text-pizza-dark">Order Management </h1>
+        <h1 className="font-display text-2xl text-pizza-dark">Order Management 💰 </h1>
         <button onClick={fetchOrders} className="text-sm text-pizza-red hover:underline">Refresh</button>
       </div>
 
